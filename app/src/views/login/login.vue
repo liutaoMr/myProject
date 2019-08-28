@@ -3,8 +3,8 @@
     <div  class="login">
       <h1>登录</h1>
       <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="left" :label-width="70">
-        <FormItem prop="user" >
-          <Input type="text" v-model="formInline.user" placeholder="用户名" style="width:250px;margin-left: 10px;">
+        <FormItem prop="username" >
+          <Input type="text" v-model="formInline.username" placeholder="用户名" style="width:250px;margin-left: 10px;">
             <Icon type="ios-person-outline" slot="prepend"></Icon>
           </Input>
         </FormItem>
@@ -25,40 +25,42 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        formInline: {
-          user: '',
-          password: '',
-          teamId:'',
-        },
-        ruleInline: {
-          user: [
-            { required: true, message: '请输入用户名', trigger: 'blur' }
-          ],
-          password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码不能少于6个字符', trigger: 'blur' }
-          ],
-          teamId: [
-            { required: true, message: '请输入团队名', trigger: 'change' }
-          ],
-        }
-      }
-    },
-    methods: {
-      handleSubmit(name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$router.push({ path: '/home' })
-          } else {
-            return false;
-          }
-        })
+export default {
+  data () {
+    return {
+      formInline: {
+        username: '',
+        password: '',
+        teamId: ''
+      },
+      ruleInline: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { type: 'string', min: 6, message: '密码不能少于6个字符', trigger: 'blur' }
+        ],
+        teamId: [
+          { required: true, message: '请输入团队名', trigger: 'change' }
+        ]
       }
     }
+  },
+  methods: {
+    handleSubmit (name) {
+      const _this = this
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          console.log(_this.formInline.username)
+          this.$router.push({ path: '/home' })
+        } else {
+          return false
+        }
+      })
+    }
   }
+}
 </script>
 
 <style scoped>
