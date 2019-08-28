@@ -317,6 +317,7 @@
 
 <style scoped>
   .ivu-checkbox-group {
+    margin-top: 10px;
     font-size: 16px;
   }
   .ivu-card-head {
@@ -394,12 +395,13 @@
     left: 18px;
   }
   #createBarcode{
-    margin: 16px 0;
+    margin: 11px 0;
     width:50%;
     height:40%;
     border-radius:16px;
   }
   .typeCheck{
+    margin-top: 10px;
     width:100%;
     height:100%;
     background:rgba(233,245,255,1);

@@ -5,7 +5,9 @@
       <div style="margin-bottom: 10px;font-size: 18px;font-weight: 700">
         <Row>
           <Col span="4">身高体重</Col>
-          <Col span="1" offset="19"><Button type="primary">保存</Button></Col>
+          <Col span="1" offset="19">
+            <Button type="primary" @click="heightWeightSave()"  >保存</Button>
+            </Col>
         </Row>
       </div>
       <div class="contentData">
@@ -14,28 +16,29 @@
             <div class="content-left">
               <Form style="padding:40px 20px;text-align: center" inline>
                 <FormItem label="身高(cm)" :label-width="120" class="formItem">
-                  <Input type="text" v-model="height" placeholder="请输入身高" style="width:120px;">
+                  <Input type="text" ref="height" v-model="height" placeholder="请输入身高" style="width:120px;">
                   </Input>
+                  <p class="form-notice" v-show="200<height||height<80">身高填写错误</p>
                 </FormItem>
                 <FormItem label="腰围(cm)" :label-width="120" class="formItem">
-                  <Input type="text" v-model="waistline" placeholder="请输入腰围" style="width:120px;">
+                  <Input type="text" ref="waistline" v-model="waistline" placeholder="请输入腰围" style="width:120px;">
                   </Input>
                 </FormItem>
                 <FormItem label="体重(kg)" :label-width="120" class="formItem">
-                  <Input type="text" v-model="weight" placeholder="请输入体重" style="width:120px;">
+                  <Input type="text" ref="weight" v-model="weight" placeholder="请输入体重" style="width:120px;">
                   </Input>
                 </FormItem>
                 <FormItem label="体温(°C)" :label-width="120" class="formItem">
-                  <Input type="text" v-model="temperature" placeholder="请输入体温" style="width:120px;">
+                  <Input type="text" ref="temperature" v-model="temperature" placeholder="请输入体温" style="width:120px;">
                   </Input>
                 </FormItem>
                 <FormItem label="BMI(kg/㎡)" :label-width="120" class="formItem" style="margin-right: 258px">
-                  <Input type="text" v-model="BMI" style="width:120px;">
+                  <Input type="text" v-model="bmiCompute" style="width:120px;">
                   </Input>
                 </FormItem>
                 <FormItem class="measureHeightBox">
                   <span>连接身高体重仪失败</span>
-                  <Button size="large" type="primary" id="heightMeasure">测量</Button>
+                  <Button size="large" type="primary" @click="heightWeightMeasure()" id="heightMeasure">测量</Button>
                 </FormItem>
                 <FormItem label="端口号" :label-width="80" style="margin-top: 20px;">
                   <Select  style="width:90px;" v-model="port">
@@ -63,7 +66,6 @@
         </Row>
       </div>
     </div>
-
   </Card>
 </div>
 </template>
@@ -80,6 +82,40 @@
             BMI:'',
             port:'8080'
           }
+      },
+      methods:{
+        heightWeightSave(){
+          var _this = this;
+          if(_this.height==''){
+            _this.$refs.height.focus();
+            _this.$Message.warning('身高不能为空');
+          }else if(_this.weight==''){
+            _this.$refs.weight.focus();
+            _this.$Message.warning('体重不能为空');
+          }else if(_this.waistline==''){
+            _this.$refs.waistline.focus();
+            _this.$Message.warning('腰围不能为空');
+          }else if(_this.temperature==''){
+            _this.$refs.temperature.focus();
+            _this.$Message.warning('体温不能为空不能为空');
+          }
+
+        },
+        heightWeightMeasure(){
+          alert('身高体重测量')
+        }
+      },
+      computed:{
+        //根据身高体重生成BMI
+        bmiCompute:function () {
+              const that =this;
+              var height = that.height/100;
+              var weight = that.weight;
+              var bmiCompute = weight/(height*height);
+              bmiCompute = bmiCompute.toFixed(2)
+              that.BMI = bmiCompute
+              return bmiCompute
+        },
       }
     }
 </script>
@@ -96,6 +132,10 @@
     height:370px;
     border-radius:4px;
     border:1px solid rgba(6,169,237,1);
+  }
+  .form-notice{
+    color: red;
+    position: absolute;
   }
   .notice p{
     text-indent: 10px;

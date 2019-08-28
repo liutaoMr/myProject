@@ -5,7 +5,9 @@
         <div style="margin-bottom: 10px;font-size: 18px;font-weight: 700">
           <Row>
             <Col span="4">血压</Col>
-            <Col span="1" offset="19"><Button type="primary">保存</Button></Col>
+            <Col span="1" offset="19">
+              <Button type="primary" @click="bloodPressureSave()" >保存</Button>
+            </Col>
           </Row>
         </div>
         <div class="contentData">
@@ -14,32 +16,32 @@
               <div class="content-left">
                 <Form style="padding:40px 20px;text-align: center" inline>
                   <FormItem label="左侧血压" :label-width="120" class="formItem">
-                    <Input type="text"   style="width:120px;">
+                    <Input type="text" v-model="leftbloodHigh"  style="width:120px;">
                     </Input>
                     <span style="font-size: 20px;margin: 0 10px;color: #D2D2D2">/</span>
-                    <Input type="text"  style="width:120px;">
+                    <Input type="text" v-model="leftbloodLow" style="width:120px;">
                     </Input>
                   </FormItem>
                   <FormItem label="脉率" :label-width="120" class="formItem">
-                    <Input type="text"   style="width:120px;">
+                    <Input type="text" v-model="mailv"  style="width:120px;">
                     </Input>
                   </FormItem>
                   <FormItem label="右侧血压" :label-width="120" class="formItem">
-                    <Input type="text"   style="width:120px;">
+                    <Input type="text"  v-model="rightbloodHigh" style="width:120px;">
                     </Input>
                     <span style="font-size: 20px;margin: 0 10px;color: #D2D2D2">/</span>
-                    <Input type="text"  style="width:120px;">
+                    <Input type="text" v-model="rightbloodLow" style="width:120px;">
                     </Input>
                   </FormItem>
                   <FormItem label="呼吸频率" :label-width="120" class="formItem">
-                    <Input type="text"   style="width:120px;">
+                    <Input type="text"  v-model="huxipinlv" style="width:120px;">
                     </Input>
                   </FormItem>
                   <FormItem class="measureBloodBox">
                     <span>连接血压计失败</span>
-                    <Button size="large" type="primary" id="bloodPressureMeasure">测量</Button>
+                    <Button size="large" type="primary" @click="bloodPressureMeasure()" id="bloodPressureMeasure">测量</Button>
                   </FormItem>
-                  <FormItem label="端口号":label-width="80" style="margin-top: 60px;">
+                  <FormItem label="端口号" :label-width="80" style="margin-top: 60px;">
                     <Select  style="width:90px;" v-model="port">
                       <Option value="8080">8080</Option>
                     </Select>
@@ -71,7 +73,26 @@
 
 <script>
     export default {
-        name: "bloodPressure"
+        name: "bloodPressure",
+        data(){
+          return{
+            leftbloodHigh:'120',
+            leftbloodLow:'80',
+            rightbloodHigh:'110',
+            rightbloodLow:'70',
+            mailv:'16',
+            huxipinlv:'100',
+          }
+        },
+        methods:{
+          bloodPressureSave(){
+           alert('血压保存')
+          },
+          bloodPressureMeasure(){
+            alert('血压测量')
+          }
+        }
+
     }
 </script>
 

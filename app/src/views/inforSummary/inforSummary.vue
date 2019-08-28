@@ -4,6 +4,7 @@
     <Col span="5" class="inforSummaryLeft">
       <h4>个人基本信息</h4>
       <div class="headPortrait">
+        <img src="../../../public/images/dhssh.png" alt="">
       </div>
       <Form>
         <div class="formItem">
@@ -50,11 +51,13 @@
     <Col span="19" class="inforSummaryRight">
       <div class="inforSummaryRightContent">
         <Tabs value="name1">
-          <TabPane label="健康体检" name="name1">标签一的内容</TabPane>
+          <TabPane label="健康体检" name="name1">
+            <jktj></jktj>
+          </TabPane>
           <TabPane label="自理能力" name="name2">标签二的内容</TabPane>
           <TabPane label="中医体质" name="name3">标签三的内容</TabPane>
-          <TabPane label="心电图" name="name3">标签三的内容</TabPane>
-          <TabPane label="B超" name="name3">标签三的内容</TabPane>
+          <TabPane label="心电图" name="name4">标签四的内容</TabPane>
+          <TabPane label="B超" name="name5">标签五的内容</TabPane>
           <Button @click="handleInforSummanySave()"  id="handleInforSummanySave" type="primary" size="small" slot="extra">保存</Button>
         </Tabs>
       </div>
@@ -64,19 +67,34 @@
 </template>
 
 <script>
-    import HeadNav from "../nav/headNav";
-    export default {
-        name: "inforSummary",
-      components: {HeadNav},
-      methods:{
-        handleInforSummanySave(){
+import jktj from './jktj/jktj'
+export default {
+  name: 'inforSummary',
+  components: { jktj },
+  data () {
+    return {
 
-        }
-      },
     }
+  },
+  methods: {
+    handleInforSummanySave () {
+
+    }
+  }
+}
 </script>
 
 <style scoped>
+.headPortrait{
+   text-align: center;
+   vertical-align: middle;
+}
+.headPortrait img{
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+
+}
 .inforSummaryLeft{
   background: white;
 }
@@ -122,4 +140,5 @@
 #handleInforSummanySave{
    margin:7px 40px;
 }
+
 </style>

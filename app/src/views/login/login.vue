@@ -51,11 +51,7 @@
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.$store.dispatch('Login', this.formInline).then(() => {
-              this.$router.push({ path: '/home' })
-            }).catch((err) => {
-              console.log('登录接口错误！', err)
-            })
+            this.$router.push({ path: '/home' })
           } else {
             return false;
           }

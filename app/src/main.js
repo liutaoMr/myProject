@@ -4,15 +4,16 @@ import router from './router'
 import store from './store/index'
 import iView from 'iview'
 import axios from 'axios'
-import qs from 'qs'
+
+import h5Autocomplate from './common/H5Autocomplate/h5Autocomplate.vue'
 import './assets/iconfont/iconfont.css'
 
 import 'iview/dist/styles/iview.css'
-import lessStyles from '../my-theme/index.less'
 
 Vue.config.productionTip = false
 Vue.use(iView)
-Vue.prototype.$ajax =axios;
+Vue.prototype.$ajax = axios
+Vue.component('h5-autocomplate', h5Autocomplate)
 
 new Vue({
   router,
